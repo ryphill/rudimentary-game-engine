@@ -10,12 +10,20 @@ public class Game extends Frame
       char key = e.getKeyChar();
       switch(key)
       {
+      	case 'd':
+    	  sone.rotateLeft();
+    	  break;
+      	case 'f':
+    	  sone.rotateRight();
+    	  break;
         case 'q':
           System.exit(0);
           break;
       }
     }
   }
+  
+  private static Square sone = null;
   
   private Game()
   {
@@ -29,6 +37,7 @@ public class Game extends Frame
   public static void main(String[] args)
   {
     Game window = new Game();
+    sone = new Square(300,200);
     window.setVisible(true);
     window.run();
   }
@@ -40,7 +49,7 @@ public class Game extends Frame
       repaint();
       try
       {
-        Thread.sleep(10000);
+        Thread.sleep(100);
       } catch (Exception e)
       {
         System.exit(1);
@@ -50,8 +59,6 @@ public class Game extends Frame
     
   public void paint(Graphics g)
   {
-    g.drawRect(300,200,90,90);
-    g.setColor(Color.red);
-    g.fillRect(301,201,90,90);
+    sone.paint(g);
   }
 }
