@@ -10,11 +10,7 @@ public abstract class Actor {
 	
 	private double posX, posY;
 	
-	public abstract void paint(Graphics g);
-	
-	public abstract void rotateLeft();
-	
-	public abstract void rotateRight();
+	public abstract void paint(Graphics2D g);
 	
 	public Actor(double px, double py)
 	{
@@ -30,6 +26,16 @@ public abstract class Actor {
 	public double getPosY()
 	{
 		return posY;
+	}
+	
+	public void setPosX(double px)
+	{
+		posX = px;
+	}
+	
+	public void setPosY(double py)
+	{
+		posY = py;
 	}
 	
 }

@@ -1,0 +1,35 @@
+import java.awt.*;
+import java.io.File;
+
+import javax.swing.ImageIcon;
+
+public class Square extends Actor {
+
+	private Image square = null;
+	private ImageIcon squareImage = new ImageIcon("/square.png");
+	//private double baseX, baseY;
+	
+	public Square(double px, double py)
+	{
+		super(px,py);
+		init();
+	}
+	
+	public void init()
+	{
+		File f = new File("./src/square.png");
+		if(f.exists())
+		{
+			System.out.println("Bla");
+		}
+		square = squareImage.getImage();
+	}
+	
+	public void paint(Graphics g)
+	{
+		Graphics2D square2D = (Graphics2D) g;
+		
+		square2D.drawImage(square,300,200,50,50,null);
+		//square2D.rotate(Math.PI/4);
+	}
+}

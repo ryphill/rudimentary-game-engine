@@ -1,73 +1,55 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Polygon;
+//import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.geom.AffineTransform;
+
+import javax.swing.ImageIcon;
+
 public class Square extends Actor {
 
-	private int Ax, Ay, Bx, By, Cx, Cy, Dx, Dy;
-	private static final double ANGLE_CHANGE = 0.1;
-	private final int SQUARE_LENGTH = 50;
-	private final Color SQUARE_COLOR = Color.black;
-	private double angle = (Math.PI)/2;
+	private double radians;
+	private AffineTransform transform;
+	private int height = 100;
+	private int width = 100;
+	private Image square = null;
+	private ImageIcon squareImage = new ImageIcon("./src/square.png");
 	//private double baseX, baseY;
 	
 	public Square(double px, double py)
 	{
 		super(px,py);
-		//baseX = px;
-		//baseY = px;
+		init();
 	}
 	
-	public void rotateLeft()
+	public void init()
 	{
-		angle += ANGLE_CHANGE;
+		square = squareImage.getImage();
 	}
 	
-	public void rotateRight()
+	public void rotation(Double rad)
 	{
-		angle -= ANGLE_CHANGE;
+		radians = rad;
 	}
 	
-	public void paint(Graphics g)
+	public boolean contains(double px, double py)
 	{
-		Polygon p = new Polygon();
-		
-		if (angle <= Math.PI/2)
-		{
-			Ax = (int) (getPosX() - SQUARE_LENGTH/2);
-			Ay = (int) getPosY();
-			p.addPoint(Ax, Ay);
-			
-			Bx = (int) (getPosX() + SQUARE_LENGTH/2);
-			By = (int) (getPosY() + Math.cos(angle)*SQUARE_LENGTH);
-			p.addPoint(Bx, By);
-			
-			Cx = (int) (Bx - Math.cos(angle)*SQUARE_LENGTH);
-			Cy = (int) (By + Math.sin(angle)*SQUARE_LENGTH);
-			p.addPoint(Cx, Cy);
-			
-			Dx = (int) (Cx - Math.cos(Math.PI/2 - angle)*SQUARE_LENGTH);
-			Dy = (int) (Cy - Math.sin(Math.PI/2 - angle)*SQUARE_LENGTH);
-			p.addPoint(Dx, Dy);
-		} else {
-			Ax = (int) (getPosX() + SQUARE_LENGTH/2);
-			Ay = (int) getPosY();
-			p.addPoint(Ax, Ay);
-			
-			Bx = (int) (getPosX() - SQUARE_LENGTH/2);
-			By = (int) (getPosY() - Math.cos(angle)*SQUARE_LENGTH);
-			p.addPoint(Bx, By);
-			
-			Cx = (int) (Bx - Math.cos(angle)*SQUARE_LENGTH);
-			Cy = (int) (By - Math.sin(angle)*SQUARE_LENGTH);
-			p.addPoint(Cx, Cy);
-			
-			Dx = (int) (Cx + Math.sin(angle - Math.PI/2)*SQUARE_LENGTH);
-			Dy = (int) (Cy - Math.cos(angle - Math.PI/2)*SQUARE_LENGTH);
-			p.addPoint(Dx, Dy);
-		}
-		
-		g.setColor(SQUARE_COLOR);
-		g.fillPolygon(p);
-		
+		if (((px > getPosX()) && (px <= getPosX() + 50) && ((py > getPosY()) && (py < getPosY() + 50))))
+			return true;
+		return false;
+	}
+	
+	public void updateSquare(double px, double py)
+	{
+		setPosX(px);
+		setPosY(py);
+	}
+	
+	public void paint(Graphics2D g)
+	{
+		//g.rotate(radians,getPosX(),getPosY());
+		//transform = g.getTransform();
+		//g.setTransform(transform);
+		g.drawImage(square,(int) getPosX(),(int) getPosY(),null);
+		//square2D.drawImage(square,300,200,null);
 	}
 }

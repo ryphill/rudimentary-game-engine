@@ -1,0 +1,66 @@
+import java.awt.*;
+import java.awt.event.*;
+
+public class Game extends Frame
+{
+  private class HandleInput extends KeyAdapter
+  {
+    public void keyPressed(KeyEvent e)
+    {
+      char key = e.getKeyChar();
+      switch(key)
+      {
+        case 'q':
+          System.exit(0);
+          break;
+      }
+    }
+  }
+  
+  private static Square sone = null;
+  private Graphics2D g2d;
+  
+  private Game()
+  {
+    this.setTitle("Game Engine: Squareville Ed");
+    this.setLocation(100,100);
+    this.setSize(600,400);
+    this.setBackground(Color.white);
+    addKeyListener(new HandleInput());
+  }
+  
+  public static void main(String[] args)
+  {
+    Game window = new Game();
+    sone = new Square(300,200);
+    window.setVisible(true);
+    window.run();
+  }
+  
+  private void run()
+  {
+    while(true)
+    {
+    	sone.rotation(1);
+    	
+    
+      repaint();
+      try
+      {
+        Thread.sleep(100);
+      } catch (Exception e)
+      {
+        System.exit(1);
+      }
+    }
+  }
+    
+  public void paint(Graphics g)
+  {
+	Graphics2D square2D = (Graphics2D) g;
+	
+	square2D.translate(250,200);
+	
+    sone.paint(square2D);
+  }
+}
