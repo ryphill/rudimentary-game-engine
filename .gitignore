@@ -1,0 +1,8 @@
+#Ignore file
+
+#compile files
+*.class
+
+#compile folders
+*bin
+*.metadata
