@@ -87,7 +87,6 @@ public class Game extends Frame
     addKeyListener(new HandleInput());
     addMouseMotionListener(new MouseInput());
     addMouseListener(new MouseInput());
-    addW
   }
   
   public static void main(String[] args)

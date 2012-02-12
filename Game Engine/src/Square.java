@@ -9,8 +9,8 @@ public class Square extends Actor {
 
 	private double radians;
 	private AffineTransform transform;
-	private int height = 100;
-	private int width = 100;
+	//private int height = 100;
+	//private int width = 100;
 	private Image square = null;
 	private ImageIcon squareImage = new ImageIcon("./src/square.png");
 	//private double baseX, baseY;
@@ -33,7 +33,7 @@ public class Square extends Actor {
 	
 	public boolean contains(double px, double py)
 	{
-		if (((px > getPosX()) && (px <= getPosX() + 50) && ((py > getPosY()) && (py < getPosY() + 50))))
+		if (((px > getPosX()) && (px <= getPosX() + square.getWidth(null)) && ((py > getPosY()) && (py < getPosY() + square.getHeight(null)))))
 			return true;
 		return false;
 	}
